@@ -31,12 +31,12 @@ static const uint8_t SCK  = 12;
 
 // ====== Backlight TFT (dari build_flags) ======
 #define TFT_BACKLIGHT_ON HIGH
-#define TFT_BL           7      // pilih GPIO yang kamu pakai untuk BL fisik
+#define TFT_BL 7
 
 // Kalau kamu punya pin spesifik LCD, bisa tambah di sini:
-// #define LCD_CS   10
-// #define LCD_DC    8
-// #define LCD_RST   9
+#define LCD_CS   10
+#define LCD_DC    8
+#define LCD_RST   9
 
 // ====== (Opsional) mapping analog A0..A19 ke GPIO berurutan ======
 static const uint8_t A0  = 1;
