@@ -1,39 +1,44 @@
 #ifndef Pins_Arduino_h
 #define Pins_Arduino_h
+
 #include <stdint.h>
 #include "soc/soc_caps.h"
 
+// USB descriptor (boleh dibiarkan sama seperti default ESP32-S3)
 #define USB_VID 0x303a
 #define USB_PID 0x1001
 
-// Tidak ada RGB / LED onboard
-// #define PIN_RGB_LED 48
-// static const uint8_t LED_BUILTIN = SOC_GPIO_PIN_COUNT + PIN_RGB_LED;
-// #define RGB_BUILTIN LED_BUILTIN
-// #define RGB_BRIGHTNESS 64
-// #define PIN_LED 6
+// ====== UART0 via USB-C ======
+static const uint8_t TX = 43;   // GPIO43: U0TXD
+static const uint8_t RX = 44;   // GPIO44: U0RXD
 
-// ===== UART0 (USB) =====
-static const uint8_t TX = 43;
-static const uint8_t RX = 44;
-
-// ===== I2C (bebas pakai) =====
-static const uint8_t SDA = 8;
+// ====== I2C bebas (SDA/SCL) ======
+static const uint8_t SDA = 8;   // Sesuaikan kalau kamu pakai I2C fisik lain
 static const uint8_t SCL = 9;
 
-// ===== SPI untuk LCD & TF card =====
-static const uint8_t SS   = 21;  // TF card CS
-static const uint8_t MOSI = 11;  // LCD/TF MOSI
-static const uint8_t MISO = 13;  // TF MISO
-static const uint8_t SCK  = 12;  // LCD/TF SCK
+// ====== SPI utama (bisa untuk TFT) ======
+static const uint8_t SS   = 21; // Default CS
+static const uint8_t MOSI = 11;
+static const uint8_t MISO = 13;
+static const uint8_t SCK  = 12;
 
-// Pin khusus LCD (kalau dipakai di firmware)
-#define LCD_CS   10
-#define LCD_DC   8
-#define LCD_RST  9
-#define LCD_BL   7
+// ====== SD Card via HSPI (dari build_flags) ======
+#define SDSPI_CLK   17   // SCK SD
+#define SDSPI_MOSI  16   // MOSI SD
+#define SDSPI_MISO  13   // MISO SD (shared)
+#define SDSPI_CS    15   // CS SD
+#define SD_ID       HSPI // sesuai -DSD_ID=HSPI
 
-// ===== Analog (optional mapping) =====
+// ====== Backlight TFT (dari build_flags) ======
+#define TFT_BACKLIGHT_ON HIGH
+#define TFT_BL           7      // pilih GPIO yang kamu pakai untuk BL fisik
+
+// Kalau kamu punya pin spesifik LCD, bisa tambah di sini:
+// #define LCD_CS   10
+// #define LCD_DC    8
+// #define LCD_RST   9
+
+// ====== (Opsional) mapping analog A0..A19 ke GPIO berurutan ======
 static const uint8_t A0  = 1;
 static const uint8_t A1  = 2;
 static const uint8_t A2  = 3;
